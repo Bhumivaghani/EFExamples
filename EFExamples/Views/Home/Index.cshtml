@@ -1,0 +1,44 @@
+﻿@model IEnumerable<EFExamples.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="panel-body">
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>age</th>
+            <th>Action</th>
+
+        </tr>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@Html.ActionLink(item.name, "Insert", new { item.id })</td>
+                <td>@item.address</td>
+                <td>@item.age</td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Home"))
+                    {
+
+                        @Html.Hidden("id", item.id)
+                        <input type="submit" value="Delete" class="btn btn-warning" />
+                    }
+                </td>
+
+            </tr>
+
+        }
+    </table>
+    <div class=panel-footer>
+        @Html.ActionLink("Add Student", "Create", null, new { @class = "btn btn-danger" })
+    </div>
+
+</div>
